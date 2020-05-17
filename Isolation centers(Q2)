@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define     ll              long long
+#define     start()         ll t;cin>>t;while(t--)
+#define     f(n)            for(ll i=0ll;i<n;i++)
+#define     fk(k,n)         for(ll i=kll;i<=n;i++)
+#define     all(v)          v.begin(),v.end()
+#define     mp              make_pair
+#define     pb              push_back
+#define     pf              push_front
+#define     pll             pair<ll,ll>
+#define     vll             vector<ll>
+#define     vpll            vector<pair<ll,ll>>
+#define     sum_all(v)      accumulate(v.begin(), v.end(), 0ll)
+#define     min_v(v)        *min_element(v.begin(),v.end())
+#define     max_v(v)        *max_element(v.begin(),v.end())
+#define     MOD             1000000007
+#define     ln              endl
+#define     show(v)         ll qz=v.size();f(qz){cout<<v[i]<<" ";}cout<<ln
+#define     bs(v,x)         binary_search(v.begin(),v.end(),x)
+
+int main()
+{
+        start()
+        {
+            ll n,m,q;
+            cin>>n>>q;
+            string s;
+            cin>>s;
+            ll alp[26]={0};
+                f(n)
+                {
+                    char p=s[i];
+                    alp[p-97]++;
+                }
+            while(q--){
+                cin>>m;
+                ll pendq=0;
+                
+                f(26)
+                {
+                    if(alp[i]>m)
+                        pendq+=(alp[i]-m);
+                }
+                cout<<pendq<<endl;
+            }
+        }
+
+
+}
