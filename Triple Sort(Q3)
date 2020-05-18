@@ -108,5 +108,5 @@ int32_t main()
 		x:;
 
 	}
-	return 0;
+	return 0
 }
