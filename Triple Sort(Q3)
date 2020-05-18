@@ -1,0 +1,112 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define int                     long long int
+#define ld                      long double
+#define pb                      push_back
+#define rep(i,a,b,c)            for(int i=(a);i<=(b);i+=(c))
+#define repb(i,a,b,c)           for(int i=(a);i>=(b);i-=(c))
+#define MOD                     1000000007
+#define inf                     3e18
+#define vpii                    vector<pair<int,int>>
+#define si                      set<int>
+#define usi                     unordered_set<int>
+#define vi                      vector<int>
+#define vld                     vector<ld>
+#define vvi                     vector<vector<int>>
+#define vvld                    vector<vector<ld>>
+#define pii                     pair<int,int>
+#define vvpii                   vector<vector<pair<int,int>>>
+#define pqi                     priority_queue<int>
+#define mii                     map<int,int>
+#define mic                     map<int,char>
+#define um                      unordered_map
+#define umii                    um<int,int>
+#define umic                    um<int,char>
+#define umci                    um<char,int>
+#define all(x)                  x.begin(),x.end()
+#define fi                      first
+#define se                      second
+#define tests                   int Testcases;cin>>Testcases;while(Testcases--)
+#define input(a,n)              for(int i=0;i<n;++i) cin>>a[i];
+
+int32_t main()
+{
+	tests
+	{
+		int n,k;
+		cin>>n>>k;
+		vi a(n),mp(n);
+		si not_set;
+		for(int i=0;i<n;++i)
+		{
+			cin>>a[i];
+			--a[i];
+			mp[a[i]]=i;
+			if(a[i]!=i)
+				not_set.insert(i);
+		}
+
+		vi ar=a;
+
+		int moves=0;
+		vector<tuple<int,int,int>> ans;
+		while(!not_set.empty())
+		{
+			++moves;
+			auto i=not_set.begin();
+			int i1,i2,i3,v1,v2,v3;
+			bool done=false;
+			while(i!=not_set.end())
+			{
+				i1=*i,v1=a[i1];
+				i2=v1,v2=a[i2];
+				if((v2!=i1)&&(a[v2]!=i2))
+				{
+					i3=v2,v3=a[i3];
+					done=true;
+					break;
+				}	
+				++i;
+			}
+			if(done==false)
+			{
+				auto itr=not_set.begin();
+				while((*itr==i1||*itr==i2)&&(itr!=not_set.end()))
+					++itr;
+				if(itr==not_set.end())
+				{
+					cout<<-1<<"\n";
+					goto x;
+				}
+				else
+				{
+					i3=*itr;
+					v3=a[i3];
+				}
+			}
+
+			tuple <int, int, int> temp;
+			temp=make_tuple(i1+1,i2+1,i3+1);
+
+			a[i2]=v1;
+			a[i3]=v2;
+			a[i1]=v3;
+
+			if(a[i1]==i1)
+				not_set.erase(i1);
+			if(a[i2]==i2)
+				not_set.erase(i2);
+			if(a[i3]==i3)
+				not_set.erase(i3);
+			ans.pb(temp);
+		}
+
+		cout<<ans.size()<<"\n";
+			for(int i=0;i<ans.size();++i)
+				cout<<get<0>(ans[i])<<" "<<get<1>(ans[i])<<" "<<get<2>(ans[i])<<"\n";
+
+		x:;
+
+	}
+	return 0;
+}
